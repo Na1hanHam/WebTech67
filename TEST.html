@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thailand Unraveled - Luxury Awaits</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Raleway:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Raleway', sans-serif; 
+            background: #f7f8fa; 
+            color: #1a2a44; 
+            overflow-x: hidden; 
+            line-height: 1.8; 
+            position: relative; 
+        }
+
+        /* Custom Cursor */
+        #cursor { position: fixed; width: 20px; height: 20px; border: 2px solid #ffd700; border-radius: 50%; pointer-events: none; z-index: 999; transition: transform 0.2s; }
+        #cursor.hover { transform: scale(1.5); background: rgba(255, 215, 0, 0.2); }
+
+        /* Navigation */
+        nav { 
+            position: fixed; top: 0; width: 100%; background: rgba(26, 42, 68, 0.95); 
+            padding: 1.5rem 4rem; z-index: 10; display: flex; justify-content: space-between; align-items: center; 
+        }
+        nav ul { list-style: none; display: flex; }
+        nav a { color: #fff; text-decoration: none; margin-left: 3rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        nav a:hover { color: #ffd700; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 2rem; color: #ffd700; }
+
+        /* Hero Section with Animated Flag */
+        .hero { 
+            height: 100vh; position: relative; display: flex; align-items: center; padding: 0 4rem; 
+            background: linear-gradient(to bottom, rgba(26, 42, 68, 0.7), rgba(0, 0, 0, 0.5)); 
+            overflow: hidden; 
+        }
+        .hero-bg { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: url('https://autourasia.com/uploads/Travel-Guide-Thailand/thailand-useful-information/thailand-flag/900-thailand-flag-useful-info.jpg') no-repeat center/cover; 
+            filter: brightness(0.8); z-index: -1; 
+            animation: flagWave 10s infinite ease-in-out; 
+            transform-style: preserve-3d; 
+        }
+        @keyframes flagWave { 
+            0% { transform: perspective(1000px) rotateY(0deg) scale(1); } 
+            50% { transform: perspective(1000px) rotateY(5deg) scale(1.05); } 
+            100% { transform: perspective(1000px) rotateY(0deg) scale(1); } 
+        }
+        .hero-content { max-width: 50%; z-index: 2; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 5rem; color: #fff; line-height: 1.2; animation: slideInLeft 1.5s ease-out; }
+        .hero p { font-size: 1.3rem; color: #f7f8fa; margin: 1rem 0; animation: fadeIn 2s ease-out; }
+        .hero .btn { padding: 1rem 2.5rem; background: #ffd700; color: #1a2a44; border: none; font-weight: 600; border-radius: 5px; cursor: pointer; transition: transform 0.3s; }
+        .hero .btn:hover { transform: translateY(-5px); }
+        .hero-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 150px; fill: #f7f8fa; opacity: 0.8; }
+
+        /* Destinations Section */
+        .destinations { padding: 6rem 4rem; position: relative; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 3rem; text-align: center; margin-bottom: 4rem; color: #1a2a44; }
+        .dest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .dest-card { 
+            position: relative; height: 500px; border-radius: 15px; overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.5s; 
+        }
+        .dest-card:hover { transform: translateY(-10px); }
+        .dest-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .dest-card:hover img { transform: scale(1.05); }
+        .dest-overlay { 
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem; 
+            background: linear-gradient(to top, rgba(26, 42, 68, 0.9), transparent); color: #fff; 
+        }
+        .dest-overlay h3 { font-family: 'Playfair Display', serif; font-size: 2rem; }
+        .dest-overlay p { font-size: 1rem; opacity: 0; transition: opacity 0.3s; }
+        .dest-card:hover .dest-overlay p { opacity: 1; }
+
+        /* CTA */
+        .cta { padding: 6rem 4rem; text-align: center; background: #1a2a44; color: #fff; }
+        .cta h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 2rem; }
+        .cta .btn { padding: 1.2rem 3rem; background: #ffd700; color: #1a2a44; border: none; font-size: 1.2rem; border-radius: 5px; cursor: pointer; }
+
+        /* Footer */
+        footer { background: #1a2a44; color: #f7f8fa; padding: 3rem; text-align: center; }
+
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Thailand Unraveled</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#cta">Plan Now</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section with Animated Flag -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>Thailand Unraveled</h1>
+            <p>Embark on a journey to the top 10 destinations where luxury meets adventure.</p>
+            <button class="btn">Discover Now</button>
+        </div>
+        <svg class="hero-svg" viewBox="0 0 1440 150" preserveAspectRatio="none">
+            <path d="M0,150 L1440,0 V150 H0 Z" fill="currentColor"></path>
+        </svg>
+    </section>
+
+    <!-- Destinations -->
+    <section id="destinations" class="destinations">
+        <h2 class="section-title">Top Destinations</h2>
+        <div class="dest-grid">
+            <div class="dest-card">
+                <img src="https://via.placeholder.com/350x500?text=Phuket" alt="Phuket">
+                <div class="dest-overlay">
+                    <h3>Phuket</h3>
+                    <p>Luxurious beaches and a nightlife that pulses with energy.</p>
+                </div>
+            </div>
+            <div class="dest-card">
+                <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/07/2c/a7/f4.jpg" alt="Chiang Mai">
+                <div class="dest-overlay">
+                    <h3>Chiang Mai</h3>
+                    <p>Temples glow against verdant mountains—an escape to serenity.</p>
+                </div>
+            </div>
+            <div class="dest-card">
+                <img src="https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/67/2023/08/29092117/Experience-the-captivating-charm-of-Walking-Street-in-Bangkok.jpg" alt="Bangkok">
+                <div class="dest-overlay">
+                    <h3>Bangkok</h3>
+                    <p>A metropolis of golden palaces and electrifying streets.</p>
+                </div>
+            </div>
+            <div class="dest-card">
+                <img src="https://www.scb.co.th/content/media/personal-banking/stories-tips/travel-sakon-nakhon/phra-that-choeng--chum.jpg" alt="Sakon Nakhon">
+                <div class="dest-overlay">
+                    <h3>Sakon Nakhon</h3>
+                    <p>Sacred sites and untouched landscapes whisper tranquility.</p>
+                </div>
+            </div>
+            <!-- Add 6 more cards -->
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section id="cta" class="cta">
+        <h2>Your Thai Adventure Awaits</h2>
+        <p>Curate your perfect escape with us.</p>
+        <button class="btn">Start Planning</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Thailand Unraveled © 2025 | Crafted for the Discerning Traveler</p>
+    </footer>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.pageX - 10}px`;
+            cursor.style.top = `${e.pageY - 10}px`;
+        });
+        document.querySelectorAll('.dest-card, .btn, a').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Parallax on Scroll
+        window.addEventListener('scroll', () => {
+            const heroBg = document.querySelector('.hero-bg');
+            const scrollPos = window.scrollY;
+            heroBg.style.backgroundPositionY = `${scrollPos * 0.3}px`;
+        });
+    </script>
+</body>
+</html>
