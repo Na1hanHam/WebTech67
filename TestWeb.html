@@ -1,271 +1,236 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thailand Luxe - The Pinnacle of Travel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Reset CSS */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Lora', serif; 
-            background: #1c2526; 
-            color: #e6b800; 
-            overflow-x: hidden; 
-            line-height: 1.8; 
-            position: relative;
-        }
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        /* Custom Cursor with Trail */
-        #cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background-color: rgba(230, 184, 0, 0.7);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            box-shadow: 0 0 10px rgba(230, 184, 0, 0.8);
-            transition: all 0.3s ease;
-        }
-        #cursor.hover { transform: scale(1.5); box-shadow: 0 0 20px rgba(230, 184, 0, 1); }
-
-        .trail {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(230, 184, 0, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: fadeOut 0.5s forwards;
-        }
-        @keyframes fadeOut {
-            to { opacity: 0; transform: scale(0); }
-        }
-
-        /* Navigation */
-        nav { 
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(28, 37, 38, 0.95); 
-            padding: 2rem 5rem;
-            z-index: 10;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-        nav ul { list-style: none; display: flex; }
-        nav a {
-            color: #e6b800;
-            text-decoration: none;
-            margin-left: 4rem;
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: color 0.3s;
-        }
-        nav a:hover { color: #fff; }
-
-        .logo { font-family: 'Cinzel', serif; font-size: 2.5rem; color: #e6b800; animation: glow 3s infinite; }
-        @keyframes glow { 0%, 100% { text-shadow: 0 0 10px #e6b800; } 50% { text-shadow: 0 0 20px #e6b800, 0 0 30px #fff; } }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            padding: 0 5rem;
-            background: linear-gradient(to bottom, rgba(28, 37, 38, 0.7), rgba(0, 0, 0, 0.8));
-            overflow: hidden;
-        }
-        .hero-bg {
-            position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 120%;
-            height: 120%;
-            background: url('https://autourasia.com/uploads/Travel-Guide-Thailand/thailand-useful-information/thailand-flag/900-thailand-flag-useful-info.jpg') no-repeat center/cover;
-            filter: brightness(0.6) blur(5px);
-            z-index: -1;
-            animation: flagLuxe 12s infinite ease-in-out;
-        }
-        @keyframes flagLuxe { 
-            0% { transform: scale(1) rotate(0deg); } 
-            50% { transform: scale(1.1) rotate(3deg); } 
-            100% { transform: scale(1) rotate(0deg); } 
-        }
-        .hero-content { max-width: 60%; z-index: 2; }
-        .hero h1 { font-family: 'Cinzel', serif; font-size: 6rem; color: #fff; text-shadow: 0 0 20px #e6b800; }
-        .hero p { font-size: 1.5rem; color: #d9d9d9; margin: 2rem 0; }
-        .hero .btn { padding: 1.2rem 3rem; background: #e6b800; color: #1c2526; border: none; font-family: 'Cinzel', serif; font-size: 1.2rem; border-radius: 5px; cursor: pointer; }
-        .hero .btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(230, 184, 0, 0.5); }
-
-        /* Golden Hour Clock */
-        .clock { position: fixed; bottom: 20px; right: 20px; background: rgba(28, 37, 38, 0.9); padding: 1rem 2rem; border-radius: 10px; color: #e6b800; font-family: 'Cinzel', serif; z-index: 10; }
-        .clock span { font-size: 1.2rem; }
-
-        /* Destinations */
-        .destinations { padding: 8rem 5rem; background: #2e3839; }
-        .section-title { font-family: 'Cinzel', serif; font-size: 4rem; text-align: center; margin-bottom: 5rem; color: #e6b800; text-shadow: 0 0 15px #e6b800; }
-        .dest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 4rem; }
-        .dest-card { position: relative; height: 600px; border-radius: 20px; overflow: hidden; border: 2px solid #e6b800; }
-        .dest-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .dest-card:hover img { transform: scale(1.1); }
-        .dest-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(28, 37, 38, 0.2), rgba(28, 37, 38, 0.9)); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; color: #fff; opacity: 0.8; transition: opacity 0.5s; }
-        .dest-card:hover .dest-overlay { opacity: 1; }
-        .dest-overlay h3 { font-family: 'Cinzel', serif; font-size: 2.5rem; text-shadow: 0 0 10px #e6b800; }
-        .dest-overlay p { font-size: 1.2rem; }
-        .dest-360 { position: absolute; top: 20px; right: 20px; background: #e6b800; color: #1c2526; padding: 0.5rem 1rem; border-radius: 5px; font-size: 0.9rem; cursor: pointer; }
-
-        /* VIP Insider */
-        .vip-insider { padding: 8rem 5rem; background: #1c2526; }
-        .vip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-        .vip-item { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
-        .vip-item.visible { opacity: 1; transform: translateY(0); }
-        .vip-item h3 { font-family: 'Cinzel', serif; font-size: 2rem; color: #e6b800; }
-        .vip-item p { color: #d9d9d9; }
-
-        /* Concierge Form */
-        .concierge { padding: 8rem 5rem; background: #2e3839; }
-        .concierge form { max-width: 600px; margin: 0 auto; }
-        .concierge input, .concierge textarea { width: 100%; padding: 1rem; margin: 1rem 0; background: rgba(230, 184, 0, 0.1); border: 1px solid #e6b800; color: #fff; border-radius: 5px; font-family: 'Lora', serif; }
-        .concierge button { padding: 1.2rem 3rem; background: #e6b800; color: #1c2526; border: none; font-family: 'Cinzel', serif; font-size: 1.2rem; border-radius: 5px; cursor: pointer; }
-
-        /* Footer */
-        footer { background: url('https://via.placeholder.com/1920x300?text=Velvet+Texture') no-repeat center/cover; padding: 4rem 5rem; text-align: center; color: #d9d9d9; }
-        footer a { color: #e6b800; text-decoration: none; }
-    </style>
-</head>
-<body>
-
-    <!-- Custom Cursor -->
-    <div id="cursor"></div>
-
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">Thailand Luxe</div>
-        <ul>
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#destinations">Destinations</a></li>
-            <li><a href="#vip">VIP</a></li>
-            <li><a href="#concierge">Concierge</a></li>
-        </ul>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-            <h1>Embark on the Ultimate Thailand Adventure</h1>
-            <p>Indulge in luxury, discover new horizons, and create unforgettable memories.</p>
-            <button class="btn">Start Your Journey</button>
-        </div>
-    </section>
-
-    <!-- Destinations Section -->
-    <section id="destinations" class="destinations">
-        <h2 class="section-title">Explore Our Exclusive Destinations</h2>
-        <div class="dest-grid">
-            <div class="dest-card">
-                <img src="https://via.placeholder.com/800x600?text=Phuket" alt="Phuket">
-                <div class="dest-overlay">
-                    <h3>Phuket</h3>
-                    <p>Opulent beaches and a nightlife drenched in extravagance.</p>
-                    <button class="dest-360" onclick="alert('Viewing 360° preview for Phuket')">360° Preview</button>
-                </div>
-            </div>
-            <div class="dest-card">
-                <img src="https://via.placeholder.com/800x600?text=Bangkok" alt="Bangkok">
-                <div class="dest-overlay">
-                    <h3>Bangkok</h3>
-                    <p>The city that never sleeps, with a rich cultural heritage.</p>
-                    <button class="dest-360" onclick="alert('Viewing 360° preview for Bangkok')">360° Preview</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- VIP Insider -->
-    <section id="vip" class="vip-insider">
-        <h2 class="section-title">VIP Insider Exclusives</h2>
-        <div class="vip-grid">
-            <div class="vip-item">
-                <h3>Private Beach Getaway</h3>
-                <p>Experience the ultimate private beach experience in Phuket with your own personal butler.</p>
-            </div>
-            <div class="vip-item">
-                <h3>Luxury Yacht Charters</h3>
-                <p>Sail the Andaman Sea on a luxury yacht with tailored services for the discerning traveler.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Concierge Form -->
-    <section id="concierge" class="concierge">
-        <h2 class="section-title">Personalized Concierge Service</h2>
-        <form id="conciergeForm">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="request" placeholder="Your Request" rows="5" required></textarea>
-            <button type="submit">Submit Request</button>
-        </form>
-    </section>
-
-    <!-- Golden Hour Clock -->
-    <div class="clock" id="goldenHourClock">
-        <span>Time in Thailand:</span>
-        <span id="clock"></span>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymou"> 
+    <title>Nathan Methaveeworachot</title>
+    </head>
+            
+            
+            <body>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                   <tr><td>1</td><td>Choopan</td><td>Nonthaburi</td></tr>
+                   <tr><td>2</td><td>Suphot</td><td>Samutprakan</td></tr>
+                   <tr><td>3</td><td>Damrongkiat</td><td>Bangkok</td></tr>
+                    </tbody>
+                    </table>
+                    <img src="image/bingo.jpg" width="200" alt="แมวส้มขาสั้น" height="200">
+ <img src="image/bingo.jpg" class="rounded" alt="แมวส้มขาสั้น" width="200" height="200">
+ <img src="image/bingo.jpg" class="rounded-circle" alt="แมวส้มขาสั้น" width="200" height="200">
+ <img src="image/bingo.jpg" class="img-thumbnail" alt="แมวส้มขาสั้น" width="200" height="200">
+ <div class="container mt-3">
+    <h2>Alerts</h2>
+    <p>Alerts are created with the .alert class, followed by
+   a contextual color classes:</p>
+    <div class="alert alert-success">
+    <strong>Success!</strong> This alert box could indicate
+   a successful or positive action.
     </div>
+    <div class="alert alert-info">
+    <strong>Info!</strong> This alert box could indicate a
+   neutral informative change or action.
+    </div>
+    <div class="alert alert-warning">
+    <strong>Warning!</strong> This alert box could indicate
+   a warning that might need attention.
+    </div>
+    <div class="alert alert-danger">
+    <strong>Danger!</strong> This alert box could indicate
+   a dangerous or potentially negative action.
+    </div>
+    <div class="alert alert-primary">
+    <strong>Primary!</strong> Indicates an important
+   action.
+    </div>
+    <div class="alert alert-secondary">
+    <strong>Secondary!</strong> Indicates a slightly less
+   important action.
+    </div>
+    <div class="alert alert-dark">
+    <strong>Dark!</strong> Dark grey alert.
+    </div>
+    <div class="alert alert-light">
+    <strong>Light!</strong> Light grey alert.
+    </div>
+   </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Thailand Luxe. All rights reserved. <a href="#">Privacy Policy</a></p>
-    </footer>
+ <div class="container mt-3">
+    <h2>Alerts</h2>
+    <p>The button with class="btn-close" and data-bs-dismiss="alert" is used to close the alert box.</p>
+    <p>The alert-dismissible class aligns the button to the right.</p>
+    <div class="alert alert-success alert-dismissible">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>Success!</strong> This alert box could indicate a successful or positive action.
+    </div>
+    <div class="alert alert-info alert-dismissible">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>Info!</strong> This alert box could indicate a neutral informative change or action.
+    </div>
+    <div class="alert alert-warning alert-dismissible">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>Warning!</strong> This alert box could indicate a warning that might need attention.
+    </div>
+   </div>
+ <div class="container mt-3">
+    <h2>Button Styles</h2>
+    <button type="button" class="btn">Basic</button>
+    <button type="button" class="btn btn-primary">Primary</button>
+    <button type="button" class="btn btn-secondary">Secondary</button>
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-info">Info</button>
+    <button type="button" class="btn btn-warning">Warning</button>
+    <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-dark">Dark</button>
+    <button type="button" class="btn btn-light">Light</button>
+    <button type="button" class="btn btn-link">Link</button>
+   </div>
+   <div class="container mt-3">
+    <h2>Button Sizes</h2>
+    <button type="button" class="btn btn-primary btn-lg">Large</button>
+    <button type="button" class="btn btn-primary btn-md">Default</button>
+    <button type="button" class="btn btn-primary btn-sm">Small</button>
+   </div>
+   <div class="container mt-3">
+    <h2>Button States</h2>
+    <button type="button" class="btn btn-primary">Primary Button</button>
+    <button type="button" class="btn btn-primary active">Active Primary</button>
+    <button type="button" class="btn btn-primary" disabled>Disabled Primary</button>
+    <a href="#" class="btn btn-primary disabled">Disabled Link</a>
+   </div>
+   <div class="container mt-3">
+    <h2>Spinner Buttons</h2>
+    <p>Add spinners to buttons:</p>
+    <button class="btn btn-primary">
+    <span class="spinner-border spinner-border-sm"></span>
+    </button>
+    <button class="btn btn-primary">
+    <span class="spinner-border spinner-border-sm"></span>
+    Loading..
+    </button>
+    <button class="btn btn-primary" disabled>
+    <span class="spinner-border spinner-border-sm"></span>
+    Loading..
+    </button>
+    <button class="btn btn-primary" disabled>
+    <span class="spinner-grow spinner-grow-sm"></span>
+    Loading..
+    </button>
+   </div>
+   
+   <div class="dropdown">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+      Dropdown button
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Link 1</a></li>
+      <li><a class="dropdown-item" href="#">Link 2</a></li>
+      <li><a class="dropdown-item" href="#">Link 3</a></li>
+    </ul>
+  </div>
 
-    <!-- Scripts -->
-    <script>
-        // Custom Cursor Logic
-        document.addEventListener('mousemove', function (e) {
-            const cursor = document.getElementById('cursor');
-            cursor.style.left = `${e.pageX}px`;
-            cursor.style.top = `${e.pageY}px`;
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Active</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#">Disabled</a>
+    </li>
+  </ul>
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Active</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Dropdown</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Link 1</a></li>
+        <li><a class="dropdown-item" href="#">Link 2</a></li>
+        <li><a class="dropdown-item" href="#">Link 3</a></li>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#">Disabled</a>
+    </li>
+  </ul>
+  <nav class="navbar navbar-expand-sm bg-light">
+    <div class="container-fluid">
+      <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link 2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link 3</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Dropdown</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Link 1</a></li>
+              <li><a class="dropdown-item" href="#">Link 2</a></li>
+              <li><a class="dropdown-item" href="#">Link 3</a></li>
+            </ul>
+          </li>
+      </ul>
+    </div>
+  </nav>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdowntoggle" href="#" role="button" data-bstoggle="dropdown">Dropdown</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Link</a></li>
+      <li><a class="dropdown-item" href="#">Another link</a></li>
+      <li><a class="dropdown-item" href="#">A third link</a></li>
+    </ul>
+  </li>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+   </div>
+   <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+   </div> 
+   <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+    <option selected>Open this select menu</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+   </select>
+   <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+    <option selected>Open this select menu</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+   </select> 
+                    <!-- Optional JavaScript; choose one of the two! -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/
+ bootstrap.bundle.min.js" integrity="sha384-
+ YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+ crossorigin="anonymous"></script>
+                </tbody>
+            </body>
 
-            const trail = document.createElement('div');
-            trail.className = 'trail';
-            trail.style.left = `${e.pageX - 5}px`;
-            trail.style.top = `${e.pageY - 5}px`;
-            document.body.appendChild(trail);
-            setTimeout(() => trail.remove(), 500);
-        });
-
-        // VIP Item Animation on Scroll
-        const vipItems = document.querySelectorAll('.vip-item');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.5 });
-
-        vipItems.forEach(item => observer.observe(item));
-
-        // Concierge Form AJAX Submission
-        document.getElementById('conciergeForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            alert('Your request has been received!');
-        });
-
-        // Golden Hour Clock
-        setInterval(function () {
-            const clock = document.getElementById('clock');
-            const date = new Date();
-            clock.textContent = date.toLocaleString('en-US', { timeZone: 'Asia/Bangkok', hour: '2-digit', minute: '2-digit' });
-        }, 60000); // Update every minute
-    </script>
-
-</body>
-</html>
+    </html>
